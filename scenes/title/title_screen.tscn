@@ -148,12 +148,12 @@ layout_mode = 2
 [node name="Credits1" type="Label" parent="Credits/MarginContainer/VBoxContainer/CreatedBy3"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
-text = "Sound FX:"
+text = "Music/SFX:"
 
 [node name="Credits2" type="Label" parent="Credits/MarginContainer/VBoxContainer/CreatedBy3"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "ZapSplat"
+text = "ZapSplat.com"
 
 [node name="HSeparator3" type="HSeparator" parent="Credits/MarginContainer/VBoxContainer"]
 layout_mode = 2
