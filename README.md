@@ -6,6 +6,7 @@ Play it at [strakul.itch.io/penguin-sleeding](https://strakul.itch.io/penguin-sl
 ## Credits
 Made with Godot Engine 4.5
 Pixel art created by me using LibreSprite.   
-Sound effects from ZapSplat.   
+Fonts from dafont.com.   
+Sound effects from ZapSplat.com.      
 Music is House in a Forest (may be updated).   
 Mobile joystick controls from "Touch Screen Joystick" plugin by Kent Coyoca.
