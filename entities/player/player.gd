@@ -12,7 +12,6 @@ var last_direction: String = "left"
 # Player hit variables
 @onready var cooldown_timer = %HitCooldown
 var hit_on_cooldown: bool = false
-var is_hit: bool = false
 
 signal player_hit
 
@@ -62,7 +61,7 @@ func update_animation() -> void:
 	# Helper function to handle animation based on direction and hits
 	
 	# Don't update the animation while the player is hit
-	if is_hit:
+	if hit_on_cooldown:
 		return
 	
 	# Regular movement
@@ -99,7 +98,6 @@ func player_is_hit():
 	# Handle all hit-effects
 	
 	# Go into a brief invuln state to avoid repeated hits
-	is_hit = true
 	hit_on_cooldown = true
 	cooldown_timer.start()
 	
@@ -136,5 +134,4 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 
 func _on_hit_cooldown_timeout() -> void:
 	hit_on_cooldown = false
-	is_hit = false
 	update_animation()
