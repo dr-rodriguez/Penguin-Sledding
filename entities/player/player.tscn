@@ -34,7 +34,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit_left",
-"speed": 0.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -42,7 +42,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"hit_right",
-"speed": 0.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -97,7 +97,7 @@ hit_sounds = Array[AudioStream]([ExtResource("2_fkugw"), ExtResource("3_8fjmc"),
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_dw050")
-animation = &"hit_left"
+animation = &"right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_sweqy")
@@ -121,4 +121,10 @@ process_material = SubResource("ParticleProcessMaterial_bls4j")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
+[node name="HitCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]

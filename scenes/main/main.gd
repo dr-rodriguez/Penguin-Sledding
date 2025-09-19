@@ -12,8 +12,6 @@ var cloud_speed: float = 100.
 # Health variables
 @onready var health = %Health
 @export var health_scene: PackedScene
-@onready var cooldown_timer = %HitCooldown
-var hit_on_cooldown: bool = false
 
 
 func _ready() -> void:
@@ -86,19 +84,8 @@ func _on_score_timer_timeout() -> void:
 
 
 func _on_player_player_hit() -> void:
-	# Do nothing if recently hit
-	if hit_on_cooldown:
-		return
-	
-	# Go into a brief invuln state to avoid repeated hits
-	hit_on_cooldown = true
-	cooldown_timer.start()
-	
 	# Player takes some damage
 	handle_health()
-	
-	# Stop motion
-	player.velocity = Vector2.ZERO
 	
 	# Player is hit enough times, game over
 	if Global.player_health <= 0:
@@ -127,7 +114,3 @@ func _on_cloud_timer_timeout() -> void:
 	# Velocity of cloud
 	var velocity = Vector2(randf_range(0.5, 1.5) * cloud_speed, 0.)
 	cloud.linear_velocity = velocity
-
-
-func _on_hit_cooldown_timeout() -> void:
-	hit_on_cooldown = false
