@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dm4pv7j8huu57"]
+
+[ext_resource type="Texture2D" uid="uid://b2drp87adrhxh" path="res://assets/art/white_cloud_64.png" id="1_vlwrh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlwrh"]
+radius = 15.1327
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2kyfr"]
+
+[node name="Cloud" type="RigidBody2D" groups=["Clouds"]]
+z_index = 50
+collision_layer = 8
+collision_mask = 0
+gravity_scale = 0.0
+linear_damp_mode = 1
+
+[node name="CloudSprite" type="Sprite2D" parent="."]
+modulate = Color(0.5847179, 0.5847179, 0.5847179, 0.5)
+position = Vector2(0, -7)
+texture = ExtResource("1_vlwrh")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 40)
+shape = SubResource("CircleShape2D_vlwrh")
+debug_color = Color(0.632911, 0.516983, 0.310259, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2kyfr")

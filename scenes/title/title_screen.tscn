@@ -1,0 +1,214 @@
+[gd_scene load_steps=10 format=3 uid="uid://buldnnpveyfm7"]
+
+[ext_resource type="Script" uid="uid://bgfy2tivek0lv" path="res://scenes/title/title_screen.gd" id="1_s4lrb"]
+[ext_resource type="FontFile" uid="uid://dgkx4mxpc3wek" path="res://assets/fonts/Game Bubble.ttf" id="1_sa3yf"]
+[ext_resource type="Theme" uid="uid://bawgy3kfs4byc" path="res://assets/theme.tres" id="2_s4lrb"]
+[ext_resource type="Texture2D" uid="uid://dspd6lyr7n4g8" path="res://assets/art/penguin_side_32.png" id="4_e54dn"]
+[ext_resource type="Texture2D" uid="uid://v3sowx4hyp25" path="res://assets/art/tree_32.png" id="5_3yumr"]
+[ext_resource type="Texture2D" uid="uid://jwjh8s3giwe" path="res://assets/art/rock1_32.png" id="6_cs5ya"]
+[ext_resource type="PackedScene" uid="uid://dm4pv7j8huu57" path="res://entities/cloud/cloud.tscn" id="7_3yumr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v6p8y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ak2if"]
+font_size = 70
+font_color = Color(0.16961, 0.364535, 0.612214, 1)
+outline_size = 2
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s4lrb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelTitle" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 128.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_v6p8y")
+
+[node name="Title" type="Label" parent="PanelTitle"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.16961, 0.364535, 0.612214, 1)
+theme_override_fonts/font = ExtResource("1_sa3yf")
+theme_override_font_sizes/font_size = 40
+text = "Penguin Sledding"
+label_settings = SubResource("LabelSettings_ak2if")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MainButtons" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 123.0
+offset_top = 233.0
+offset_right = 357.0
+offset_bottom = 407.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_s4lrb")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainButtons"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainButtons/MarginContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="MainButtons/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../Credits")
+text = "Start"
+
+[node name="Credits" type="Button" parent="MainButtons/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../StartButton")
+focus_neighbor_bottom = NodePath("../Quit")
+text = "Credits"
+
+[node name="Quit" type="Button" parent="MainButtons/MarginContainer/VBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../Credits")
+text = "Quit"
+
+[node name="Credits" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -215.5
+offset_top = -131.5
+offset_right = 215.5
+offset_bottom = 131.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_s4lrb")
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits/MarginContainer"]
+layout_mode = 2
+
+[node name="MadeWith" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Credits1" type="Label" parent="Credits/MarginContainer/VBoxContainer/MadeWith"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Made with:"
+
+[node name="Credits2" type="Label" parent="Credits/MarginContainer/VBoxContainer/MadeWith"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "Godot Engine v4.5"
+
+[node name="HSeparator1" type="HSeparator" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreatedBy2" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Credits1" type="Label" parent="Credits/MarginContainer/VBoxContainer/CreatedBy2"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Created by:"
+
+[node name="Credits2" type="Label" parent="Credits/MarginContainer/VBoxContainer/CreatedBy2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "David Rodriguez"
+
+[node name="HSeparator2" type="HSeparator" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="CreatedBy3" type="HBoxContainer" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Credits1" type="Label" parent="Credits/MarginContainer/VBoxContainer/CreatedBy3"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+text = "Sound FX:"
+
+[node name="Credits2" type="Label" parent="Credits/MarginContainer/VBoxContainer/CreatedBy3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "ZapSplat"
+
+[node name="HSeparator3" type="HSeparator" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Credits/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackToMain" type="Button" parent="Credits/MarginContainer/VBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="PenguinSide32" type="Sprite2D" parent="Node2D"]
+position = Vector2(28, 316)
+texture = ExtResource("4_e54dn")
+
+[node name="Tree32" type="Sprite2D" parent="Node2D"]
+position = Vector2(66, 175)
+texture = ExtResource("5_3yumr")
+
+[node name="Tree33" type="Sprite2D" parent="Node2D"]
+position = Vector2(445, 493)
+texture = ExtResource("5_3yumr")
+
+[node name="Tree34" type="Sprite2D" parent="Node2D"]
+position = Vector2(52, 510)
+texture = ExtResource("5_3yumr")
+
+[node name="Tree36" type="Sprite2D" parent="Node2D"]
+position = Vector2(184, 552)
+texture = ExtResource("5_3yumr")
+
+[node name="Tree35" type="Sprite2D" parent="Node2D"]
+position = Vector2(427, 156)
+texture = ExtResource("5_3yumr")
+
+[node name="Rock132" type="Sprite2D" parent="Node2D"]
+position = Vector2(218, 180)
+texture = ExtResource("6_cs5ya")
+
+[node name="Rock133" type="Sprite2D" parent="Node2D"]
+position = Vector2(280, 580)
+texture = ExtResource("6_cs5ya")
+
+[node name="Cloud" parent="Node2D" instance=ExtResource("7_3yumr")]
+position = Vector2(429, 56)
+
+[node name="Cloud2" parent="Node2D" instance=ExtResource("7_3yumr")]
+position = Vector2(47, 69)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="MainButtons/MarginContainer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="MainButtons/MarginContainer/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="MainButtons/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Credits/MarginContainer/VBoxContainer/MarginContainer/BackToMain" to="." method="_on_back_to_main_pressed"]

@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7bhhrpqdf0u6"]
+
+[ext_resource type="Texture2D" uid="uid://jwjh8s3giwe" path="res://assets/art/rock1_32.png" id="1_1di36"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brfkd"]
+size = Vector2(21.002474, 16.00784)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_brfkd"]
+radius = 19.0263
+
+[node name="Rock" type="StaticBody2D" groups=["Obstacles", "Rocks"]]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_1di36")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.492155, 1.99524)
+rotation = 0.000826199
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_brfkd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_brfkd")
+debug_color = Color(0.381848, 0.595654, 0.416095, 0.42)

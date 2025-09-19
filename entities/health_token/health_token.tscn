@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://clcjl5fhiyanm"]
+
+[ext_resource type="Texture2D" uid="uid://c5rw1fbhuxqgb" path="res://assets/art/heart_32-Sheet.png" id="1_bikf7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5nml"]
+atlas = ExtResource("1_bikf7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lypyq"]
+atlas = ExtResource("1_bikf7")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wp8cj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5nml")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lypyq")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}]
+
+[node name="HealthToken" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 13.0
+offset_bottom = 13.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wp8cj")
+animation = &"full"

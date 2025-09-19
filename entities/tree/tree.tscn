@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjg6hmcbh7tco"]
+
+[ext_resource type="Texture2D" uid="uid://v3sowx4hyp25" path="res://assets/art/tree_32.png" id="1_brfkd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brfkd"]
+size = Vector2(12, 10)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_brfkd"]
+radius = 19.0263
+
+[node name="Tree" type="StaticBody2D" groups=["Obstacles", "Trees"]]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_brfkd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 10)
+shape = SubResource("RectangleShape2D_brfkd")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_brfkd")
+debug_color = Color(0.381848, 0.595654, 0.416095, 0.42)

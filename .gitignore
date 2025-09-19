@@ -1,0 +1,11 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+builds/
+
+# Can't share music/sounds
+assets/music/
+assets/sounds/
+
+.editorconfig
+.gitattributes

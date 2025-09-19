@@ -1,0 +1,110 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2h20htfir7la"]
+
+[ext_resource type="Script" uid="uid://bn213wlvd7o87" path="res://scenes/game_over/game_over.gd" id="1_ccer4"]
+[ext_resource type="Theme" uid="uid://bawgy3kfs4byc" path="res://assets/theme.tres" id="1_y26ei"]
+[ext_resource type="AudioStream" uid="uid://baf10wkvrhc3v" path="res://assets/sounds/zapsplat_multimedia_game_sound_cute_harp_warm_fail_lose_114209.mp3" id="3_iqjl0"]
+[ext_resource type="Texture2D" uid="uid://dspd6lyr7n4g8" path="res://assets/art/penguin_side_32.png" id="4_v3hpu"]
+[ext_resource type="Texture2D" uid="uid://v3sowx4hyp25" path="res://assets/art/tree_32.png" id="5_irg28"]
+[ext_resource type="Texture2D" uid="uid://jwjh8s3giwe" path="res://assets/art/rock1_32.png" id="6_2jtsn"]
+
+[sub_resource type="Theme" id="Theme_wqhvx"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ccer4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -91.5
+offset_top = -73.0
+offset_right = 91.5
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_wqhvx")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme = ExtResource("1_y26ei")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="GameOverLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_y26ei")
+text = "Game Over!"
+horizontal_alignment = 1
+
+[node name="GOScoreLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_y26ei")
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("1_y26ei")
+text = "Re-Try"
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_iqjl0")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="PenguinSide32" type="Sprite2D" parent="Node2D"]
+position = Vector2(28, 316)
+texture = ExtResource("4_v3hpu")
+
+[node name="Tree32" type="Sprite2D" parent="Node2D"]
+position = Vector2(115, 131)
+texture = ExtResource("5_irg28")
+
+[node name="Tree33" type="Sprite2D" parent="Node2D"]
+position = Vector2(445, 493)
+texture = ExtResource("5_irg28")
+
+[node name="Tree34" type="Sprite2D" parent="Node2D"]
+position = Vector2(52, 510)
+texture = ExtResource("5_irg28")
+
+[node name="Tree36" type="Sprite2D" parent="Node2D"]
+position = Vector2(184, 552)
+texture = ExtResource("5_irg28")
+
+[node name="Tree35" type="Sprite2D" parent="Node2D"]
+position = Vector2(361, 163)
+texture = ExtResource("5_irg28")
+
+[node name="Rock132" type="Sprite2D" parent="Node2D"]
+position = Vector2(218, 180)
+texture = ExtResource("6_2jtsn")
+
+[node name="Rock133" type="Sprite2D" parent="Node2D"]
+position = Vector2(280, 580)
+texture = ExtResource("6_2jtsn")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]

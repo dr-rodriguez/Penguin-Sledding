@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=3 uid="uid://rnt6rijcegvj"]
+
+[ext_resource type="Script" uid="uid://ehe0uj0ewa17" path="res://entities/player/player.gd" id="1_sweqy"]
+[ext_resource type="AudioStream" uid="uid://bre7otqm3pufc" path="res://assets/sounds/HitSounds/zapsplat_impacts_body_hard_fall_hit_ground_rubble_stones_004_86732.mp3" id="2_fkugw"]
+[ext_resource type="Texture2D" uid="uid://bwlmtnhxg38ah" path="res://assets/art/penguin_down_32-Sheet.png" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://ldj7te7ls34w" path="res://assets/sounds/HitSounds/zapsplat_impacts_body_hit_punch_or_kick_whoosh_008_90402.mp3" id="3_8fjmc"]
+[ext_resource type="Texture2D" uid="uid://bfrcwb2cpaqyp" path="res://assets/art/heart_32.png" id="3_sglur"]
+[ext_resource type="AudioStream" uid="uid://bwoskyl3lgiks" path="res://assets/sounds/HitSounds/zapsplat_impacts_body_person_heavy_005_43768.mp3" id="4_qiwj3"]
+[ext_resource type="AudioStream" uid="uid://cd78y6oh6q7dn" path="res://assets/sounds/HitSounds/zapsplat_impacts_body_fall_hit_ground_stones_dirt_001_43756.mp3" id="5_26q78"]
+[ext_resource type="Texture2D" uid="uid://c7vanwfdb7m62" path="res://assets/art/penguin_hit_l.png" id="6_bectd"]
+[ext_resource type="Texture2D" uid="uid://bj641pchu2jr1" path="res://assets/art/penguin_hit_r.png" id="7_wvtmh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhqgy"]
+atlas = ExtResource("2_g2els")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
+atlas = ExtResource("2_g2els")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qlg0r"]
+atlas = ExtResource("2_g2els")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tuyoq"]
+atlas = ExtResource("2_g2els")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dw050"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_bectd")
+}],
+"loop": false,
+"name": &"hit_left",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wvtmh")
+}],
+"loop": false,
+"name": &"hit_right",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhqgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkch")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qlg0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tuyoq")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+height = 24.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sweqy"]
+radius = 11.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bls4j"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, 8, 0)
+emission_shape = 1
+emission_sphere_radius = 10.0
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+direction = Vector3(0, 2, 0)
+spread = 90.0
+initial_velocity_min = 1.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.19999999
+scale_max = 0.5
+scale_over_velocity_max = 30.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_sweqy")
+hit_sounds = Array[AudioStream]([ExtResource("2_fkugw"), ExtResource("3_8fjmc"), ExtResource("4_qiwj3"), ExtResource("5_26q78")])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dw050")
+animation = &"hit_left"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_sweqy")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_sweqy")
+debug_color = Color(0.890274, 0.260697, 0.501968, 0.42)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+texture = ExtResource("3_sglur")
+lifetime = 0.8
+one_shot = true
+visibility_rect = Rect2(-50, -50, 100, 100)
+process_material = SubResource("ParticleProcessMaterial_bls4j")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
