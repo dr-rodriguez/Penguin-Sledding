@@ -89,6 +89,7 @@ func _on_player_player_hit() -> void:
 	
 	# Player is hit enough times, game over
 	if Global.player_health <= 0:
+		await player.anim.animation_finished
 		game_over()
 
 

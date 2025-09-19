@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://rnt6rijcegvj"]
+[gd_scene load_steps=21 format=3 uid="uid://rnt6rijcegvj"]
 
 [ext_resource type="Script" uid="uid://ehe0uj0ewa17" path="res://entities/player/player.gd" id="1_sweqy"]
 [ext_resource type="AudioStream" uid="uid://bre7otqm3pufc" path="res://assets/sounds/HitSounds/zapsplat_impacts_body_hard_fall_hit_ground_rubble_stones_004_86732.mp3" id="2_fkugw"]
@@ -67,6 +67,43 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_bectd"]
+resource_name = "flash"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1.6124506, 1.6124506, 1.6124506, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wvtmh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7thud"]
+_data = {
+&"RESET": SubResource("Animation_wvtmh"),
+&"flash": SubResource("Animation_bectd")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
 height = 24.0
 
@@ -99,6 +136,12 @@ hit_sounds = Array[AudioStream]([ExtResource("2_fkugw"), ExtResource("3_8fjmc"),
 sprite_frames = SubResource("SpriteFrames_dw050")
 animation = &"right"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_7thud")
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_sweqy")
 
@@ -111,7 +154,7 @@ position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_sweqy")
 debug_color = Color(0.890274, 0.260697, 0.501968, 0.42)
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="HurtHeartsParticles" type="GPUParticles2D" parent="."]
 emitting = false
 texture = ExtResource("3_sglur")
 lifetime = 0.8

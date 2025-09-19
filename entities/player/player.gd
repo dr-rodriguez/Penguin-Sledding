@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 @export var hit_sounds: Array[AudioStream]
+
 @onready var anim = $AnimatedSprite2D
-@onready var hurt_hearts = $GPUParticles2D
+@onready var anim_player = $AnimatedSprite2D/AnimationPlayer
+@onready var hurt_hearts = $HurtHeartsParticles
 const PLAYER_SPEED: float = 200.0
 const MAX_SPEED: float = 1000.0
 var direction: Vector2 = Vector2.ZERO
+var last_direction: String = "left"
 # Player hit variables
 @onready var cooldown_timer = %HitCooldown
 var hit_on_cooldown: bool = false
@@ -58,20 +61,19 @@ func moving_logic(delta) -> void:
 func update_animation() -> void:
 	# Helper function to handle animation based on direction and hits
 	
+	# Don't update the animation while the player is hit
 	if is_hit:
-		var hit_anims = ["hit_left", "hit_right"]
-		if direction.x < 0 or velocity.x < 0:
-			anim.animation = hit_anims[0]
-		elif direction.x > 0 or velocity.x > 0:
-			anim.animation = hit_anims[1]
-		else:
-			anim.animation = hit_anims[randi_range(0, 1)]
+		return
+	
+	# Regular movement
+	if direction.x < 0:
+		last_direction = "left"
+		anim.animation = "left"
+	elif direction.x > 0:
+		last_direction = "right"
+		anim.animation = "right"
 	else:
-		# Regular movement
-		if direction.x < 0:
-			anim.animation = "left"
-		elif direction.x > 0:
-			anim.animation = "right"
+		anim.animation = last_direction
 	
 	anim.play()
 	# Stop if no key is being pressed
@@ -97,6 +99,7 @@ func player_is_hit():
 	# Handle all hit-effects
 	
 	# Go into a brief invuln state to avoid repeated hits
+	is_hit = true
 	hit_on_cooldown = true
 	cooldown_timer.start()
 	
@@ -104,10 +107,18 @@ func player_is_hit():
 	velocity = Vector2.ZERO
 	
 	# Change animation
-	is_hit = true
-	update_animation()
+	var hit_anims = ["hit_left", "hit_right"]
+	if direction.x < 0 or velocity.x < 0:
+		anim.animation = hit_anims[0]
+	elif direction.x > 0 or velocity.x > 0:
+		anim.animation = hit_anims[1]
+	else:
+		anim.animation = hit_anims[randi_range(0, 1)]
 	
-	# Play hurt effect
+	# Flash white
+	anim_player.play("flash")
+	
+	# Play hurt effects
 	hurt_hearts.restart()
 	play_random_hit_sound()
 
