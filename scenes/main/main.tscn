@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://u7h5tmebd46t"]
+[gd_scene load_steps=14 format=3 uid="uid://u7h5tmebd46t"]
 
 [ext_resource type="Script" uid="uid://crmvcldx6fj75" path="res://scenes/main/main.gd" id="1_b1x3f"]
 [ext_resource type="PackedScene" uid="uid://dm4pv7j8huu57" path="res://entities/cloud/cloud.tscn" id="2_a8run"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cjg6hmcbh7tco" path="res://entities/tree/tree.tscn" id="7_raeie"]
 [ext_resource type="PackedScene" uid="uid://b7bhhrpqdf0u6" path="res://entities/rock/rock.tscn" id="8_hxu8e"]
 [ext_resource type="AudioStream" uid="uid://bh11mn3b6c8fk" path="res://assets/music/music_orlamusic_Happy+003.mp3" id="10_a8run"]
+[ext_resource type="Theme" uid="uid://bawgy3kfs4byc" path="res://assets/theme.tres" id="11_ouso4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(640, 192)
@@ -43,7 +44,9 @@ layer = 100
 unique_name_in_owner = true
 offset_right = 113.0
 offset_bottom = 42.0
+theme = ExtResource("11_ouso4")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.69965345, 0.69965345, 0.69965345, 1)
 theme_override_font_sizes/font_size = 30
 text = "Score: 0"
 
@@ -158,6 +161,43 @@ autostart = true
 [node name="CloudTimer" type="Timer" parent="."]
 wait_time = 1.5
 autostart = true
+
+[node name="Tutorial" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 221.0
+offset_top = 297.0
+offset_right = 261.0
+offset_bottom = 337.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_ouso4")
+
+[node name="MarginContainer" type="MarginContainer" parent="Tutorial"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tutorial/MarginContainer"]
+layout_mode = 2
+
+[node name="Instruction1" type="Label" parent="Tutorial/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Use WASD/Arrow keys to move"
+horizontal_alignment = 1
+
+[node name="Instruction2" type="Label" parent="Tutorial/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Move fast for a higher score"
+horizontal_alignment = 1
+
+[node name="Instruction3" type="Label" parent="Tutorial/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Don't hit any obstacles!"
+horizontal_alignment = 1
 
 [connection signal="player_hit" from="Player" to="." method="_on_player_player_hit"]
 [connection signal="area_entered" from="Player/Despawn" to="Player/Despawn" method="_on_area_entered"]

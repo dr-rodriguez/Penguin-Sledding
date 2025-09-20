@@ -3,6 +3,7 @@ extends Node2D
 @onready var player = %Player
 @onready var bgmusic = %BackgroundMusic
 @onready var score_label = %Score
+@onready var instruction1 = %Instruction1
 # Using a plugin for Touch Screen Joystick
 @onready var joystick_node = %TouchScreenJoystick 
 # Cloud variables
@@ -29,6 +30,9 @@ func _ready() -> void:
 		# If not on mobile, hide the joystick nodes
 		if joystick_node:
 			joystick_node.hide()
+	# Change instruction text
+	if is_mobile:
+		instruction1.text = "Use on-screen Joystick to move"
 
 
 func prepare_health():
