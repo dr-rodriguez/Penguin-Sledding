@@ -127,9 +127,9 @@ func _on_hurt_box_body_entered(body: Node2D) -> void:
 		# Do nothing if recently hit
 		if hit_on_cooldown:
 			return
-		
-		player_is_hit()
-		emit_signal("player_hit")
+		else:
+			player_is_hit()
+			emit_signal("player_hit")
 
 
 func _on_hit_cooldown_timeout() -> void:
